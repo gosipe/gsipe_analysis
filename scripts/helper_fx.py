@@ -1,11 +1,9 @@
 
-from scipy.interpolate import interp1d
-from scipy.optimize import curve_fit
-import matplotlib.pyplot as plt
-import numpy as np
-import xml.etree.ElementTree as ET
+## Module for helper functions ##
 
 def fill_outliers(data, method, outlier_locations):
+    import numpy as np
+    from scipy.interpolate import interp1d
     filled_data = np.copy(data)
     outlier_indices = np.where(outlier_locations)[0]
     
@@ -27,6 +25,7 @@ def line_intersection(x1, y1, x2, y2, x3, y3, x4, y4):
     return x_intersect, y_intersect
 
 def read_xml(fn_xml):
+    import xml.etree.ElementTree as ET
     sess_info = {}
     struct_xml = ET.parse(fn_xml).getroot()
     
@@ -92,6 +91,7 @@ def read_xml(fn_xml):
     return sess_info
 
 def std_shade(xax, amean, astd, alpha, acolor):
+    import matplotlib.pyplot as plt
     if alpha is None:
         plt.fill_between(xax, amean+astd, amean-astd, color=acolor, linestyle='none')
         acolor = 'k'
@@ -105,6 +105,7 @@ def std_shade(xax, amean, astd, alpha, acolor):
     plt.show()
 
 def sterr(data, dim=1):
+    import numpy as np
     summary_stats = {}
     summary_stats['samples'] = data.shape[dim]
     summary_stats['mean'] = np.nanmean(data, axis=dim)
@@ -114,9 +115,12 @@ def sterr(data, dim=1):
     return summary_stats
 
 def vm_fxn(x, b, a1, a2, k, pref_rad):
+    import numpy as np
     return b + a1 * np.exp(k * np.cos(x - pref_rad)) + a2 * np.exp(-k * np.cos(x - pref_rad))
 
 def vm_fit(observed, pref_deg, theta_deg=None):
+    import numpy as np
+    from scipy.optimize import curve_fit
     if theta_deg is None:
         theta_deg = np.arange(0, 360, 360 / len(observed))
     theta_rad = np.deg2rad(theta_deg)
