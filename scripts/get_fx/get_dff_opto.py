@@ -9,6 +9,8 @@ import numpy as np
 from scipy.stats import kde, zscore, percentileofscore
 
 def get_dff_opto(f, real_frames, type='Method2'):
+    import numpy as np
+    from scipy.stats import kde, zscore, percentileofscore
     # Determines if multiple ROIs are being analyzed
     if f.shape[0] > 1:
         num_roi = f.shape[0]
