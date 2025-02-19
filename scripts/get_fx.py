@@ -1,4 +1,4 @@
-
+# Module for custom 'get' functions
 
 def get_dff(f, type='Method2'):
     import numpy as np
