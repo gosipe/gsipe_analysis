@@ -2,8 +2,8 @@
 
 def analyze_grat(master):
     import numpy as np
-    import get_osi
-    import get_tc
+    from get_fx import get_osi
+    from get_fx import get_tc
     from scipy.stats import ttest_ind
     osi_thresh = 0.2
     pval_cutoff = 0.01
